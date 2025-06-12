@@ -1,6 +1,6 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
-
+// This file is used to configure Firebase settings for the application.
 export default {
     firebaseConfig: {
         apiKey: process.env.API_KEY,
