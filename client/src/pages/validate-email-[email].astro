@@ -1,0 +1,69 @@
+---
+import Layout from "../layouts/LoginLayout.astro";
+import Input from "../components/Input.tsx";
+
+const { email } = Astro.params;
+---
+
+<Layout
+  title="Verificación"
+  subtitle="Ingrese el código que recibió en su correo"
+>
+  <div class="flex flex-col w-5/6 gap-5 lgn:w-5/6 mt-7">
+    <form autocomplete="off" class="flex flex-col gap-5">
+      <span id="email" class="w-full text-center -mt-4 italic text-lg"
+        >{email}</span
+      >
+      <Input
+        id="code"
+        title="Código de verificación"
+        formType="text"
+        placeHolderLG="Ingrese el código de verificación"
+        placeHolderSM="Código de verificación"
+        logo="/code.svg"
+        client:only="react"
+      />
+      <a href="/" class="text-zinc-500">Volver al login</a>
+      <a
+        id="submit-button"
+        class="flex items-center justify-center w-full py-1 text-lg text-white transition duration-300 ease-in-out rounded-lg bg-primary-dark hover:bg-primary-light group"
+      >
+        <label
+          class="transition duration-300 ease-in-out group-hover:transform group-hover:scale-110"
+          >Validar</label
+        >
+        <img
+          src="/arrow-right.svg"
+          alt="arrow-right"
+          class="ml-2 transition duration-300 ease-in-out group-hover:transform group-hover:translate-x-1 group-hover:scale-110"
+        />
+      </a>
+    </form>
+  </div>
+  <h2 class="mt-6">
+    No tienes cuenta? <a href="/register" class="text-primary-light"
+      >Regístrate</a
+    >
+  </h2>
+</Layout>
+<script>
+  import * as AuthServices from "../services/authService.ts";
+  const email = (document.getElementById("email") as HTMLElement).innerText;
+  console.log(email);
+
+  // redirect function
+  const button = document.getElementById("submit-button");
+  if (button) {
+    button.addEventListener("click", async () => {
+      const code = (document.getElementById("code") as HTMLInputElement).value;
+      const response = await AuthServices.validateToken(email, code);
+      if (response) {
+        window.alert("Código validado correctamente");
+        window.localStorage.setItem("token", code);
+        window.location.href = "/new-password-" + email;
+      } else {
+        window.alert("Código inválido");
+      }
+    });
+  }
+</script>

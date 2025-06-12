@@ -1,0 +1,14 @@
+---
+import Layout from "@/layouts/MainLayout.astro";
+import StudentCard from "@/components/StudentCard.tsx";
+
+const { id } = Astro.params;
+---
+
+<Layout title="GuíaTEC" currentRoute="profesores">
+  <div
+    class="absolute inset-0 grid h-screen pt-24 -z-10 lgn:pt-12 place-items-center"
+  >
+    <StudentCard studentID={id ?? ""} client:only="react" />
+  </div>
+</Layout>

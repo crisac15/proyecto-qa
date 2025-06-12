@@ -1,0 +1,13 @@
+---
+import Layout from "@/layouts/MainLayout.astro";
+import StudentTable from "@/components/StudentTable.tsx";
+---
+
+<Layout title="GuíaTEC" currentRoute="estudiantes">
+  <header class="flex justify-between mx-10 sm:mx-20">
+    <h1 class="text-3xl font-bold">Estudiantes</h1>
+  </header>
+  <div class="mb-10">
+    <StudentTable client:only="react" />
+  </div>
+</Layout>

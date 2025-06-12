@@ -1,0 +1,10 @@
+---
+import Layout from "@/layouts/MainLayout.astro";
+import TeamDisplay from "@/components/TeamDisplay.tsx";
+---
+
+<Layout title="GuíaTEC" currentRoute="equipo">
+  <TeamDisplay client:only="react" />
+</Layout>
+
+<script></script>

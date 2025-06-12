@@ -1,0 +1,18 @@
+---
+import ActivityForm from "@/components/ActivityForm";
+import Layout from "@/layouts/MainLayout.astro";
+
+const { wid, aid } = Astro.params;
+---
+
+<Layout title="Editar Actividad" currentRoute="equipo">
+  <div
+    class="absolute inset-0 grid h-screen pt-24 -z-10 lgn:pt-12 place-items-center"
+  >
+    <ActivityForm
+      client:only="react"
+      activityId={aid || ""}
+      workplanId={wid || ""}
+    />
+  </div>
+</Layout>

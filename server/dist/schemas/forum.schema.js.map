@@ -1,0 +1,1 @@
+{"version":3,"file":"forum.schema.js","sourceRoot":"","sources":["../../src/schemas/forum.schema.ts"],"names":[],"mappings":";;;;;AAAA,uCAA4C;AAC5C,sEAA6C;AAE7C,gDAAgD;AAChD,MAAM,WAAW,GAAW,IAAI,iBAAM,CAAC;IACrC,QAAQ,EAAE;QACR,mBAAmB;QACnB,IAAI,EAAE,CAAC,wBAAa,CAAC;KACtB;CACF,CAAC,CAAC;AAEH,kBAAe,WAAW,CAAC"}

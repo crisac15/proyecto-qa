@@ -1,0 +1,81 @@
+---
+import Layout from "../layouts/LoginLayout.astro";
+import Input from "../components/Input.tsx";
+---
+
+<Layout title="Bienvenido !" subtitle="Ingrese sus datos">
+  <div class="flex flex-col w-5/6 gap-5 lgn:w-5/6 mt-7">
+    <form class="flex flex-col gap-5">
+      <Input
+        id="email"
+        title="Correo"
+        formType="email"
+        placeHolderLG="Ingrese su correo"
+        placeHolderSM="Correo"
+        logo="/email.svg"
+        client:only="react"
+      />
+      <Input
+        id="password"
+        title="Contraseña"
+        formType="password"
+        placeHolderLG="Ingrese su contraseña"
+        placeHolderSM="Contraseña"
+        logo="/password.svg"
+        client:only="react"
+      />
+
+      <div class="flex justify-between w-full">
+        <div>
+          <input type="checkbox" name="remember" />
+          <label for="remember" class="text-sm text-zinc-700">Recuérdame</label>
+        </div>
+        <a href="/forgot-password" class="text-sm text-zinc-500"
+          >Olvidó su contraseña?</a
+        >
+      </div>
+
+      <a
+        id="submit-button"
+        class="flex items-center justify-center w-full py-1 text-lg text-white transition duration-300 ease-in-out rounded-lg bg-primary-dark hover:bg-primary-light group"
+      >
+        <label
+          class="transition duration-300 ease-in-out group-hover:transform group-hover:scale-110"
+          >Ingresar</label
+        >
+        <img
+          src="/arrow-right.svg"
+          alt="arrow-right"
+          class="ml-2 transition duration-300 ease-in-out group-hover:transform group-hover:translate-x-1 group-hover:scale-110"
+        />
+      </a>
+    </form>
+  </div>
+  <h2 class="mt-6">
+    No tienes cuenta? <a
+      href="/register"
+      target="_blank"
+      class="text-primary-light">Regístrate</a
+    >
+  </h2>
+</Layout>
+<script>
+  import * as AuthServices from "../services/authService.ts";
+
+  const button = document.getElementById("submit-button");
+  if (button) {
+    button.addEventListener("click", async () => {
+      const email = document.getElementById("email") as HTMLInputElement;
+      const password = document.getElementById("password") as HTMLInputElement;
+
+      const user = await AuthServices.login(email.value, password.value);
+
+      if (user) {
+        localStorage.setItem("user", JSON.stringify(user));
+        window.location.href = "/team";
+      } else {
+        alert("Usuario o contraseña incorrectos");
+      }
+    });
+  }
+</script>

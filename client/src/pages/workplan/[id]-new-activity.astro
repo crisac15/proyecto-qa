@@ -1,0 +1,14 @@
+---
+import ActivityForm from "@/components/ActivityForm.tsx";
+import Layout from "@/layouts/MainLayout.astro";
+
+const { id } = Astro.params;
+---
+
+<Layout title="Creador de Actividades" currentRoute="equipo">
+  <div
+    class="absolute inset-0 grid h-screen pt-24 -z-10 lgn:pt-12 place-items-center"
+  >
+    <ActivityForm workplanId={id || ""} client:only="react" />
+  </div>
+</Layout>

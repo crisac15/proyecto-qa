@@ -1,0 +1,17 @@
+---
+import Layout from "@/layouts/MainLayout.astro";
+import TeachersTable from "@/components/TeachersTable.tsx";
+import RegisterTeacher from "@/components/RegisterTeacher.tsx";
+---
+
+<Layout title="GuíaTEC" currentRoute="profesores">
+  <header
+    class="flex justify-between mx-10 sm:mx-20 my-6 flex-col sm:flex-row gap-3"
+  >
+    <h1 class="text-3xl font-bold">Profesores</h1>
+    <RegisterTeacher client:only="react" />
+  </header>
+  <div class="grid place-items-center">
+    <TeachersTable client:only="react" />
+  </div>
+</Layout>

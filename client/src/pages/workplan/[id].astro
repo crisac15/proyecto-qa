@@ -1,0 +1,10 @@
+---
+import Layout from "@/layouts/MainLayout.astro";
+import WorkPlanDisplay from "@/components/WorkPlan";
+
+const { id } = Astro.params;
+---
+
+<Layout title="GuíaTEC" currentRoute="equipo">
+  <WorkPlanDisplay id={id || ""} client:only="react" />
+</Layout>

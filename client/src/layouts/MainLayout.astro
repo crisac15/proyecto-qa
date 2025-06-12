@@ -1,0 +1,58 @@
+---
+import Header from "@/components/NavBar.tsx";
+
+interface Props {
+  title: string;
+  currentRoute: "equipo" | "estudiantes" | "profesores";
+}
+
+const { title, currentRoute } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es" class="bg-slate-50">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <Header client:only="react" currentRoute={currentRoute} />
+    <slot />
+  </body>
+</html>
+<script>
+  import * as workplanService from "@/services/workplanService.ts";
+
+  if (!localStorage.getItem("user")) {
+    window.location.href = "/";
+  }
+
+  if (!localStorage.getItem("time")) {
+    localStorage.setItem("time", "2024-06-21 23:30:00Z");
+  }
+
+  await workplanService.notifyActitities(
+    localStorage.getItem("time") || "2024-06-01 23:30:00Z"
+  );
+</script>
+<style is:global>
+  html {
+    font-family: Inter, sans-serif;
+    background-size: 224px;
+  }
+  code {
+    font-family: Inter, sans-serif;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>

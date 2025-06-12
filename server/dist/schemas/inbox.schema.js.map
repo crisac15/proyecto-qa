@@ -1,0 +1,1 @@
+{"version":3,"file":"inbox.schema.js","sourceRoot":"","sources":["../../src/schemas/inbox.schema.ts"],"names":[],"mappings":";;AAAA,uCAA4C;AAE5C,MAAM,WAAW,GAAW,IAAI,iBAAM,CAAC;IACrC,aAAa,EAAE,EAAE,IAAI,EAAE,CAAC,MAAM,CAAC,EAAE,QAAQ,EAAE,IAAI,EAAE;IACjD,iBAAiB,EAAE,EAAE,IAAI,EAAE,CAAC,MAAM,CAAC,EAAE,QAAQ,EAAE,IAAI,EAAE;CACtD,CAAC,CAAC;AAEH,kBAAe,WAAW,CAAC"}

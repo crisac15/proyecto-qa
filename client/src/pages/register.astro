@@ -1,0 +1,127 @@
+---
+import Layout from "@/layouts/RegisterLayout.astro";
+import Input from "@/components/Input.tsx";
+import { Campus } from "@/lib/types.ts";
+---
+
+<Layout title="Nuevo Profesor" subtitle="Ingrese sus datos">
+  <div class="flex flex-col w-5/6 gap-5 mt-5 lgn:w-5/6">
+    <form class="flex flex-col gap-2">
+      <Input
+        id="Nombre"
+        title=""
+        formType="text"
+        placeHolderLG="Ingrese su nombre"
+        placeHolderSM="Nombre"
+        logo="/user.svg"
+        client:only="react"
+      />
+
+      <Input
+        id="Teléfono celular"
+        title=""
+        formType="tel"
+        placeHolderLG="Ingrese su teléfono celular"
+        placeHolderSM="Teléfono celular"
+        logo="/cellphone.svg"
+        client:only="react"
+      />
+
+      <Input
+        id="Teléfono de oficina"
+        title=""
+        formType="tel"
+        placeHolderLG="Ingrese su teléfono de oficina"
+        placeHolderSM="Teléfono de oficina"
+        logo="/phone.svg"
+        client:only="react"
+      />
+      <Input
+        id="Correo"
+        title=""
+        formType="email"
+        placeHolderLG="Ingrese su correo"
+        placeHolderSM="Correo"
+        logo="/email.svg"
+        client:only="react"
+      />
+      <div class="flex justify-between gap-2">
+        <Input
+          id="Contraseña"
+          title=""
+          formType="password"
+          placeHolderLG="Ingrese su contraseña"
+          placeHolderSM="Contraseña"
+          logo="/password.svg"
+          client:only="react"
+        />
+        <div class="flex flex-col w-full">
+          <div class="relative flex flex-row items-center">
+            <img src="/location.svg" alt="select" class="absolute left-2 w-7" />
+            <select
+              class="w-full py-3 transition-all duration-300 ease-in-out border rounded-lg text-zinc-500 pl-11 border-zinc-300 focus:outline-none focus:ring-1 focus:ring-primary-light focus:border-zinc-500"
+              id="Sede"
+              name="Sede"
+              required
+            >
+              <option value="" disabled selected> Sede </option>
+              {
+                Object.values(Campus).map((campus: string) => (
+                  <option value={campus}>{campus}</option>
+                ))
+              }
+            </select>
+          </div>
+        </div>
+      </div>
+      <a
+        id="submit-button"
+        class="flex items-center justify-center w-full py-1 text-lg text-white transition duration-300 ease-in-out rounded-lg bg-primary-dark hover:bg-primary-light group"
+      >
+        <label
+          class="transition duration-300 ease-in-out group-hover:transform group-hover:scale-110"
+          >Enviar</label
+        >
+        <img
+          src="/arrow-right.svg"
+          alt="arrow-right"
+          class="ml-2 transition duration-300 ease-in-out group-hover:transform group-hover:translate-x-1 group-hover:scale-110"
+        />
+      </a>
+    </form>
+  </div>
+</Layout>
+<script>
+  import * as teachersService from "@/services/teacherService.ts";
+  import type { Teacher } from "@/lib/types.ts";
+  import { Campus } from "@/lib/types.ts";
+  // redirect function
+  const button = document.getElementById("submit-button");
+  if (button) {
+    button.addEventListener("click", async () => {
+      const newTeacher: Teacher = {
+        name: (document.getElementById("Nombre") as HTMLInputElement).value,
+        personalPNumber: (
+          document.getElementById("Teléfono celular") as HTMLInputElement
+        ).value,
+        officePNumber: (
+          document.getElementById("Teléfono de oficina") as HTMLInputElement
+        ).value,
+        email: (document.getElementById("Correo") as HTMLInputElement).value,
+        password: (document.getElementById("Contraseña") as HTMLInputElement)
+          .value,
+        campus: (document.getElementById("Sede") as HTMLSelectElement)
+          .value as Campus,
+        id: "",
+        userType: "teacher",
+      };
+      await teachersService.createTeacher(newTeacher).then((response) => {
+        if (response.status === 200) {
+          window.location.href = "/register-success";
+        } else {
+          alert("Error al registrar al profesor ");
+        }
+      });
+    });
+  }
+</script>

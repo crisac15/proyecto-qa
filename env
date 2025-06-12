@@ -1,0 +1,1 @@
+MONGO_CONNECTION_STRING = "mongodb+srv://whiit:1228@guiatec.95rtdmj.mongodb.net/?retryWrites=true&w=majority&appName=GuiaTEC"
